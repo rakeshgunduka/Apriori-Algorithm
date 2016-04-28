@@ -1,7 +1,6 @@
 from __future__ import division
 from nltk import regexp_tokenize
 import csv,copy
-
 ###########Globals###########
 d = []
 d_main = {}
@@ -9,7 +8,6 @@ dv = []
 count = {}
 allowed = {}
 last_level = 0
-
 ###########Join two sets###########
 def join(d1,d2):
 	if type(d1) == list and type(d2) == list:
@@ -22,7 +20,6 @@ def join(d1,d2):
 		return rls
 	else:
 		return [d1,d2]
-
 ###########Get Pairs of Dataset###########
 def getpairss(ls,level):
 	d1 = d2 = ls
@@ -48,7 +45,6 @@ def check_for_support(d_val,level,support):
 		if i >= support:
 			ls.append(d_val[j])
 	return sorted(ls)
-
 ###########Check Value in Dataset###########
 def checkinlist(check_val,in_data):
 	if type(check_val) == list:
@@ -63,7 +59,6 @@ def checkinlist(check_val,in_data):
 			return True
 		else:
 			return False
-
 ###########Count Occurences of Dataset###########
 def count_occurencee(d_val,d):
 	d_valcnt = [0 for i in range(len(d_val))]
@@ -72,7 +67,6 @@ def count_occurencee(d_val,d):
 			if checkinlist(i,j):
 				d_valcnt[d_val.index(i)] += 1
 	return d_valcnt
-
 ###########Apriori Function###########
 def apriori(level,d_val,support):
 	global last_level
@@ -97,7 +91,6 @@ def apriori(level,d_val,support):
 	print "Allowed :",allowed[level]
 	level += 1
 	apriori(level,d_val,support)
-
 ###########Check For Stronges Associtaion###########
 def	check_strongassoc(freq,val):
 	ls = []
@@ -107,7 +100,6 @@ def	check_strongassoc(freq,val):
 		if cal_val > threshold:
 			ls.append(i)
 	return ls
-
 ###########Check for Association Rule for frequent sets###########
 def assoc_rules(freqsets):
 	cs = {}
@@ -119,7 +111,6 @@ def assoc_rules(freqsets):
 		cs[j] = check_strongassoc(i,val)
 	ls = ([len(cs[i]) for i in cs])
 	return freqsets[ls.index(max(ls))]
-
 ###########Main###########	
 if __name__ == '__main__':
 	print "\n",23*"*","Apriori Algorithm","*"*21
